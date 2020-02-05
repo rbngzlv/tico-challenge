@@ -1,0 +1,48 @@
+version: '3.6'
+
+networks:
+  network:
+    driver: overlay
+
+volumes:
+  gem-cache:
+    external: false
+  pg-data:
+    external: false
+
+services:
+  pg:
+    image: mdillon/postgis:11-alpine
+    networks:
+      - network
+    volumes:
+      - ${PWD}/config/docker/pg:/docker-entrypoint-initdb.d
+      - pg-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - ${DB_PORT:-54432}:5432
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: ${DB_DATABASE:-tico_development}
+      POSTGRES_TEST_DB: ${DB_TEST_DATABASE:-tico_test}
+      POSTGRES_USER: ${DB_USERNAME:-tico}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-tico}
+
+  ruby:
+    image: tico/ruby:development
+    tty: true
+    stdin_open: true
+    volumes:
+      - ${PWD}:/var/app
+      - gem-cache:/usr/local/bundle:delegated
+    depends_on:
+      - pg
+    networks:
+      - network
+    ports:
+      - 3030:3030
+    environment:
+      APP_DATABASE_HOST: pg
+      APP_DATABASE_USERNAME: ${DB_USERNAME:-tico}
+      APP_DATABASE_PASSWORD: ${DB_PASSWORD:-tico}
+      APP_DATABASE_NAME: ${DB_DATABASE:-tico_development}
+      APP_DATABASE_TEST_NAME: ${DB_TEST_DATABASE:-tico_test}

@@ -1,0 +1,12 @@
+.byebug_history
+.git
+.gitignore
+.rspec-failures
+
+config/master.key
+coverage
+docker-compose*
+Dockerfile
+log
+tmp
+storage
