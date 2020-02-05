@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+coverage/
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -14,6 +15,7 @@
 !/tmp/.keep
 
 .byebug_history
+.rspec-failures
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
