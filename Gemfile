@@ -44,11 +44,17 @@ group :test do
   gem "chronic"
   gem "factory_bot_rails", "~> 5.1"
   gem "faker", "~> 2.7"
-  gem "rails-controller-testing", "~> 1.0"
+  gem "jsonapi-rspec"
   gem "rspec-rails", "~> 3.9"
   gem "simplecov"
   gem "webmock", "~> 3.7"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "dry-initializer", "~> 3.0"
+gem "dry-matcher", "~> 0.8.3"
+gem "dry-monads", "~> 1.3"
+gem "dry-validation", "~> 1.4"
+gem "fast_jsonapi"

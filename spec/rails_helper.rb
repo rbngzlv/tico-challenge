@@ -17,6 +17,7 @@ require "rspec/rails"
 
 require "byebug"
 require "factory_bot_rails"
+require "jsonapi/rspec"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -42,6 +43,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.include JSONAPI::RSpec
+
   # Uncomment this if yo want to execute custom sql on database
   # config.before(:suite) do
   #   Pistes::Application.load_tasks
