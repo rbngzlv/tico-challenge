@@ -4,5 +4,6 @@ FactoryBot.define do
   factory(:platform, class: "Platform") do
     kind { Platform::TYPES.sample }
     api_key { Faker::Internet.device_token }
+    extra_fields { {} }
   end
 end

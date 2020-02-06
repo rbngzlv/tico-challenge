@@ -55,6 +55,14 @@ RSpec.describe Profiles::UpdateCommand do
 
       let(:contract) { success_contract }
 
+      context "and platforms exists on db" do
+        let!(:any_platform) { create(:platform) }
+
+        it "updates enqueue the job to update the platforms" do
+          expect { result }.to have_enqueued_job(UpdatePlatformJob)
+        end
+      end
+
       it "returns success with the record" do
         expect(result).to be_success
 

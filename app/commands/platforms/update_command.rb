@@ -6,6 +6,8 @@ module Platforms
       attributes = yield validate(params)
       record = yield save_record(record, attributes.to_h)
 
+      UpdatePlatformJob.perform_later record
+
       Success([:ok, record])
     end
   end

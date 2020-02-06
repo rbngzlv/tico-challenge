@@ -55,6 +55,10 @@ RSpec.describe Platforms::UpdateCommand do
 
       let(:contract) { success_contract }
 
+      it "updates enqueue the job to update the platform" do
+        expect { result }.to have_enqueued_job(UpdatePlatformJob)
+      end
+
       it "returns success with the record" do
         expect(result).to be_success
 
