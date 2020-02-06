@@ -44,7 +44,7 @@ group :test do
   gem "chronic"
   gem "factory_bot_rails", "~> 5.1"
   gem "faker", "~> 2.7"
-  gem "jsonapi-rspec"
+  gem "jsonapi-rspec", require: false
   gem "rspec-rails", "~> 3.9"
   gem "simplecov"
   gem "webmock", "~> 3.7"

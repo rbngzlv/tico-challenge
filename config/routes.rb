@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       resource :profile, only: [:show, :update], controller: :profile
+      resources :platforms, only: [:show, :update], param: :kind, constraints: ->(req) { Platform::TYPES.include?(req.params[:kind]) }
     end
   end
 end

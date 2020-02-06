@@ -15,3 +15,11 @@ Profile.create!(
   lng: 120.5895,
   closed: true
 )
+
+unless Platform.any?
+  Platform.create!([
+                     { kind: "type_a", api_key: "4fb6c9ee385f3b803bd05f9638d52908", extra_fields: { category_id: 1500 } },
+                     { kind: "type_b", api_key: "4fb6c9ee385f3b803bd05f9638d52908", extra_fields: { category_id: 2010 } },
+                     { kind: "type_c", api_key: "4fb6c9ee385f3b803bd05f9638d52908", extra_fields: { address_line_2: "" } }
+                   ])
+end
