@@ -153,6 +153,7 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
+    oj (3.10.2)
     parallel (1.19.1)
     parser (2.7.0.2)
       ast (~> 2.4.0)
@@ -275,6 +276,7 @@ DEPENDENCIES
   fast_jsonapi
   jsonapi-rspec
   listen (>= 3.0.5, < 3.2)
+  oj (~> 3.10)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)

@@ -32,16 +32,20 @@ module Platforms
     end
 
     def platform_url(_platform_config)
-      raise "Implement the platform_url method in your subclass"
+      raise "Implement BaseService#platform_url method in your subclass"
+    end
+
+    def parse_response(_data)
+      raise "Implement BaseService#parse_response method in your subclass"
     end
 
     def prepare_data(_profile, _platform_config)
-      raise "Implement the prepare_data method in your subclass"
+      raise "Implement BaseService#prepare_data method in your subclass"
     end
 
     def update_platform_data(url, data)
       response = client.patch(url, data)
-      Success(response)
+      Success(parse_response(response.body))
     rescue BasicHttpClient::TryLaterRequest => e
       Failure([:try_later, e.message])
     rescue BasicHttpClient::BadRequest => e

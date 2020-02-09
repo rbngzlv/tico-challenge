@@ -12,6 +12,6 @@ RSpec.describe PlatformSerializer do
   end
 
   it "renders all necessary attributes" do
-    expect(document["data"]).to have_attributes(:kind, :api_key, :extra_fields)
+    expect(document["data"]).to have_attributes(:kind, :api_key, :extra_fields, :current_info, :last_sync)
   end
 end

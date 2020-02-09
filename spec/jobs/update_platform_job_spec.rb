@@ -13,6 +13,10 @@ RSpec.describe UpdatePlatformJob do
         "http://www.example.com"
       end
 
+      def parse_response(data)
+        Oj.load(data)
+      end
+
       def prepare_data(*_args)
         Dry::Monads::Success({})
       end
@@ -31,7 +35,9 @@ RSpec.describe UpdatePlatformJob do
   end
 
   it "works with a success platform update" do
-    expect(MockedHttpClient).to receive(:patch).with(any_args).and_return(true)
+    expect(MockedHttpClient).to receive(:patch).with(any_args).and_return(MockedHttpClient.mocked_response(200, '{"name" : "paul"}'))
+    expect(platform).to receive(:update!).with(current_info: { name: "paul"}.stringify_keys, last_sync: kind_of(Time))
+
     subject
   end
 

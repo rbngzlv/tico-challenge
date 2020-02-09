@@ -9,8 +9,11 @@ class UpdatePlatformJob < ApplicationJob
     @platform = platform
 
     service.call(Profile.get, platform) do |result|
-      result.success do |_code|
-        # Do nothing
+      result.success do |_code, body|
+        platform.update!(
+          current_info: body,
+          last_sync: Time.current
+        )
       end
 
       result.failure :try_later do |_code, reason|

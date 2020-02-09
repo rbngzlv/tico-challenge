@@ -8,8 +8,12 @@ module Platforms
       "#{PLATFORM_A_URL}?api_key=#{platform_config.api_key}"
     end
 
+    def parse_response(data)
+      Oj.load(data).except("id", "created_at", "updated_at", "api_key")
+    end
+
     def prepare_data(profile, platform_config)
-      Success(
+      Success(venue: {
         name: profile.name,
         address: profile.address,
         lat: profile.lat,
@@ -17,11 +21,11 @@ module Platforms
         category_id: platform_config.extra_fields.fetch("category_id", ""),
         closed: profile.closed,
         hours: formatted_hours(profile.hours)
-      )
+      })
     end
 
     def formatted_hours(hours)
-      return "" unless hours
+      return nil unless hours.present?
 
       hours.gsub(/[a-zA-z]+:/, "")
     end
